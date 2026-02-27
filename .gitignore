@@ -1,0 +1,13 @@
+# Data files
+*.db
+*.csv
+*.xlsx
+data/
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS
+.DS_Store
