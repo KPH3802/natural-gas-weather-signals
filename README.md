@@ -26,19 +26,19 @@ Pulls three data streams into a unified SQLite database:
 
 Merges everything into a `master_weekly` table aligned by EIA reporting week.
 
-### Phase 2 — Weather-Storage Relationship (`phase2_weather_storage_analysis.py`)
+### Phase 2 — Weather-Storage Relationship (`research/phase2_weather_storage_analysis.py`)
 Analyzes how HDD/CDD degree days predict weekly storage changes:
 - Regression models: HDD → storage withdrawals, CDD → storage injections
 - Seasonal decomposition and residual analysis
 - Measures predictive power of weather vs. historical averages
 
-### Phase 2B — Consensus Proxy Model (`phase2b_consensus_enhanced.py`)
+### Phase 2B — Consensus Proxy Model (`research/phase2b_consensus_enhanced.py`)
 Builds a consensus replacement using the 5-year storage average:
 - Backtests surprise signals (actual vs. 5-year average) against forward price moves
 - Enhanced feature engineering to beat simple consensus
 - Framework for incorporating real analyst consensus data
 
-### Phase 2C — Storage Deviation Deep Dive (`phase2c_storage_deviation.py`)
+### Phase 2C — Storage Deviation Deep Dive (`research/phase2c_storage_deviation.py`)
 The core signal validation — 8 tests:
 1. Price mean-reversion baseline (is NG price alone predictive?)
 2. Storage deviation after controlling for price level
@@ -51,8 +51,8 @@ The core signal validation — 8 tests:
 
 ### Utilities
 - `ng_consensus_accumulator.py` — Accumulates and tracks consensus estimates
-- `eia_diagnostic.py` — Validates EIA data integrity
-- `eia_storage_fix.py` — Repairs gaps in historical storage data
+- `research/eia_diagnostic.py` — Validates EIA data integrity
+- `research/eia_storage_fix.py` — Repairs gaps in historical storage data
 
 ---
 
@@ -73,9 +73,9 @@ git clone https://github.com/KPH3802/natural-gas-weather-signals.git
 cd natural-gas-weather-signals
 pip install requests yfinance
 python3 nat_gas_weather_collector.py YOUR_EIA_API_KEY
-python3 phase2_weather_storage_analysis.py
-python3 phase2b_consensus_enhanced.py
-python3 phase2c_storage_deviation.py
+python3 research/phase2_weather_storage_analysis.py
+python3 research/phase2b_consensus_enhanced.py
+python3 research/phase2c_storage_deviation.py
 ```
 
 Free EIA API key: https://www.eia.gov/opendata/register.php
@@ -86,12 +86,12 @@ Free EIA API key: https://www.eia.gov/opendata/register.php
 
 ```
 nat_gas_weather_collector.py       # Phase 1: EIA + NOAA + futures data pipeline
-phase2_weather_storage_analysis.py # Phase 2: Weather → storage regression
-phase2b_consensus_enhanced.py      # Phase 2B: Consensus proxy and enhanced model
-phase2c_storage_deviation.py       # Phase 2C: Signal validation and OOS backtest
+research/phase2_weather_storage_analysis.py # Phase 2: Weather → storage regression
+research/phase2b_consensus_enhanced.py      # Phase 2B: Consensus proxy and enhanced model
+research/phase2c_storage_deviation.py       # Phase 2C: Signal validation and OOS backtest
 ng_consensus_accumulator.py        # Consensus tracking utility
-eia_diagnostic.py                  # Data validation
-eia_storage_fix.py                 # Historical data repair
+research/eia_diagnostic.py                  # Data validation
+research/eia_storage_fix.py                 # Historical data repair
 data/                              # SQLite DB + CSV exports (not committed)
 results/                           # Backtest outputs (not committed)
 ```
